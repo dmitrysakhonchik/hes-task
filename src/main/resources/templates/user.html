@@ -14,15 +14,20 @@
 <body>
 
 <div class="container">
-    <h1>List</h1>
+    <h1 align="center">List of user accounts </h1>
+
+
+
     <table class="table">
         <thead>
         <tr>
-            <td>ID</td>
-            <td>USERNAME</td>
-            <td>PASSWORD</td>
-            <td>FIRSTNAME</td>
-            <td>LASTNAME</td>
+            <th scope="col">ID</th>
+            <th scope="col">USERNAME</th>
+            <th scope="col">PASSWORD</th>
+            <th scope="col">FIRST NAME</th>
+            <th scope="col">LAST NAME</th>
+            <th scope="col">ROLE</th>
+            <th scope="col">STATUS</th>
         </tr>
         </thead>
         <tbody>
@@ -32,11 +37,16 @@
             <td th:text="${userAccount.password}"/>
             <td th:text="${userAccount.firstName}"/>
             <td th:text="${userAccount.lastName}"/>
-            <td><a th:href="@{'/view/' + ${userAccount.id}}">Details</a></td>
-            <td><a th:href="@{'/user/delete/' + ${userAccount.id}}">Delete</a></td>
+            <td th:text="${userAccount.role}"/>
+            <td th:text="${userAccount.status}"/>
+            <td><a th:href="@{'/user/' + ${userAccount.id}}" class="btn btn-dark">Details</a></td>
+            <td><a th:href="@{'/user/delete/' + ${userAccount.id}}" class="btn btn-danger">Delete</a></td>
+            <td><a th:href="@{'/user/' + ${userAccount.id} + '/edit'}" class="btn btn-primary">Edit</a></td>
         </tr>
         </tbody>
+
     </table>
+    <a th:href="@{'/user/new'}" class="btn btn-primary">New User </a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

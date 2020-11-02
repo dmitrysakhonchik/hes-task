@@ -24,8 +24,13 @@ public class UserAccountService {
         return userAccountRepository.findAll();
     }
 
-    public void deleteUserAccountById(Long id){
+    public void deleteUserAccountById(Long id) {
         userAccountRepository.deleteById(id);
+    }
+
+    public void addUserAccount(UserAccount userAccount) {
+
+        userAccountRepository.save(userAccount);
     }
 
 }
