@@ -3,16 +3,21 @@ package by.sakhonchik.hestask.services;
 import by.sakhonchik.hestask.entities.UserAccount;
 import by.sakhonchik.hestask.repositories.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserAccountService {
-    private UserAccountRepository userAccountRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserAccountRepository userAccountRepository;
 
     @Autowired
-    public void setUserAccountRepository(UserAccountRepository userAccountRepository) {
+    public UserAccountService(PasswordEncoder passwordEncoder, UserAccountRepository userAccountRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.userAccountRepository = userAccountRepository;
     }
 
@@ -29,7 +34,7 @@ public class UserAccountService {
     }
 
     public void addUserAccount(UserAccount userAccount) {
-
+        userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
         userAccountRepository.save(userAccount);
     }
 
