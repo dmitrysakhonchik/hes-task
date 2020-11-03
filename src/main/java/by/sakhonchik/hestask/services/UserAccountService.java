@@ -1,12 +1,15 @@
 package by.sakhonchik.hestask.services;
 
 import by.sakhonchik.hestask.dto.UserAccountDto;
+import by.sakhonchik.hestask.entities.Role;
+import by.sakhonchik.hestask.entities.Status;
 import by.sakhonchik.hestask.entities.UserAccount;
 import by.sakhonchik.hestask.repositories.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -71,9 +74,21 @@ public class UserAccountService {
         userAccountRepository.save(userAccount);
     }
 
-
     public boolean isUsernameExist(String username) {
         return userAccountRepository.existsUserAccountByUsername(username);
+    }
+
+    @PostConstruct
+    public void initFirstUser(){
+        UserAccount userAccount = new UserAccount();
+        userAccount.setUsername("admin");
+        userAccount.setPassword(passwordEncoder.encode("12zxasqW!"));
+        userAccount.setFirstName("Dmitry");
+        userAccount.setLastName("Sakhonchik");
+        userAccount.setRole(Role.ADMIN);
+        userAccount.setStatus(Status.ACTIVE);
+        userAccount.setCreateAt(LocalDate.now());
+        userAccountRepository.save(userAccount);
     }
 
 
