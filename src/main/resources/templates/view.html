@@ -12,11 +12,34 @@
     <title>View</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h5>View</h5>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <form th:action="@{/logout}" method="post">
+            <button class="btn btn-dark" type="submit">Logout</button>
+        </form>
+    </div>
+</nav>
+<div class="container mt-3">
+    <span th:text="${'ID : ' + selectedAccount.id}"></span><br>
+    <span th:text="${'USERNAME : ' + selectedAccount.username}"></span><br>
+    <span th:text="${'FIRST NAME : ' + selectedAccount.firstName}"></span><br>
+    <span th:text="${'LAST NAME : ' + selectedAccount.lastName}"></span><br>
+    <span th:text="${'ROLE : ' + selectedAccount.role}"></span><br>
+    <span th:text="${'STATUS : ' + selectedAccount.status}"></span>
 
-<div class="container">
-    <h1>View</h1>
-    <span th:text="${selectedAccount.username + ' ' + selectedAccount.lastName}"></span>
+    <div class="container mt-2">
+        <a href="/user" class="btn btn-primary">Back</a>
+    </div>
 </div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

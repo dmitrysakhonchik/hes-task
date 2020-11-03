@@ -11,6 +11,7 @@ public enum Role {
 
     private final Set<Permission> permissions;
 
+
     Role(Set<Permission> permissions) {
         this.permissions = permissions;
     }
@@ -24,6 +25,8 @@ public enum Role {
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
                 .collect(Collectors.toSet());
     }
+
+
 
 
 }
