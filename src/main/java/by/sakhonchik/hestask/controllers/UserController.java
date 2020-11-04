@@ -20,6 +20,7 @@ import java.util.List;
 public class UserController {
     private UserAccountService userAccountService;
 
+
     @Autowired
     public void setUserAccountService(UserAccountService userAccountService) {
         this.userAccountService = userAccountService;
@@ -66,16 +67,22 @@ public class UserController {
     public String showUpdateForm(Model model, @PathVariable("id") Long id) {
         UserAccountDto userAccountDto = userAccountService.getUserAccountById(id);
         model.addAttribute("userAccount", userAccountDto);
+        userAccountService.deleteUserAccountById(id);
         return "edit";
     }
 
     @PostMapping("/update/{id}")
     @PreAuthorize("hasAuthority('users:write')")
-    public String updateUserAccount(UserAccountDto userAccountDto) {
-        userAccountService.updateUserAccount(userAccountDto);
-        return "redirect:/user";
-    }
+    public String updateUserAccount(@Valid @ModelAttribute("userAccount") UserAccountDto userAccountDto,
+                                    BindingResult result) {
+        if (result.hasErrors()) {
+            return "edit";
+        } else {
+            userAccountService.updateUserAccount(userAccountDto);
+            return "redirect:/user";
+        }
 
+    }
 
     @GetMapping("/user/delete/{id}")
     @PreAuthorize("hasAuthority('users:write')")
