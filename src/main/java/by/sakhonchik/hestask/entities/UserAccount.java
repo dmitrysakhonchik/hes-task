@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Table(name = "user_account", schema = "webapp")
 public class UserAccount {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "username")

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserAccountService {
@@ -62,7 +61,6 @@ public class UserAccountService {
 
     public void updateUserAccount(UserAccountDto userAccountDto) {
         UserAccount userAccount = new UserAccount();
-
         userAccount.setId(userAccountDto.getId());
         userAccount.setUsername(userAccountDto.getUsername());
         userAccount.setPassword(passwordEncoder.encode(userAccountDto.getPassword()));
